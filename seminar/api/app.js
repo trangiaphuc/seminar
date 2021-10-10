@@ -5,7 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var session = require('express-session');
+var bmiRouter = require('./routes/bmi')
 var app = express();
 
 // view engine setup
@@ -18,16 +18,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({
-  secret: 'abcdefg',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { maxAge: 60000 }
-}));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/bmi', bmiRouter);
 app.post('/register', (req, res) => {
   console.log(req.body);
   res.send('Created User');

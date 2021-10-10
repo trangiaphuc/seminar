@@ -69,10 +69,8 @@ router.post('/edit', (req, res) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let birthday = req.body.birthday;
-  let weight = req.body.weight;
-  let height = req.body.height;
 
-  let user_info = {firstName: firstName, lastName: lastName, birthday: birthday, weight: weight, height: height};
+  let user_info = {firstName: firstName, lastName: lastName, birthday: birthday};
   let query = 'update users set ?';
   db.query(query, user_info, (err, result) => {
     if (err) {throw err;}
