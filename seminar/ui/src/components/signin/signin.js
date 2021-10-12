@@ -1,65 +1,63 @@
-import React, {useState } from "react";
-import {useHistory} from "react-router-dom";
-// import userService from "../../services/userService";
-export default function LogIn() {
-
-        let history = useHistory();
-        const [user, setUser] = useState({
-            gmail: "",
-            password: ""
-        });
-
-        // const [gmail, setGmail] = useState('');
-        // const [password, setPasssword] = useState('')
-
-        const handleChange = e => {
-            const { name, value } = e.target;
-            setUser(prevState => ({
-                ...prevState,
-                [name]: value
-            }));
-        };
-
-        // const handleChangeGmail = (e) =>{
-        //     setGmail(e.target.value);
-        // }
-
-        // const handleChangePassword = (e) =>{
-        //     setPasssword(e.target.value);
-        // }
+import React, { } from "react";
+//import {useHistory} from "react-router-dom";
+import axios from "axios";
 
 
-        // const isValid = ()=>{
-        //     if(user.password === '' || user.gmail === '')
-        //         return false;
-        //     return true;
-        // }
-    //     TutorialDataService.removeAll()
-    //   .then(response => {
-    //     console.log(response.data);
-    //     refreshList();
-    //   })
-    //   .catch(e => {
-    //     console.log(e);
-    //   });
-        const handleSubmit = (e) =>{
-            e.preventDefault();
-            
-            let gmail = user.gmail;
-            let password = user.password;
+export default class LogIn extends React.Component {
+        state = {
+            gmail : "",
+            password : ""};
 
-            console.log({gmail: gmail, password: password});
+        handleChange = e =>{
+            this.setState({[e.target.name] : e.target.value});
         }
 
+        handleSubmit = e =>{
+            e.preventDefault();
+           
+            let data = JSON.stringify({
+                password: this.state.password,
+                gmail: this.state.gmail
+            });
+        
+            var request = new XMLHttpRequest();
+            request.open('POST', 'http://localhost:9000/users/signin', true);
+            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
+            request.send(data);
+
+            // const requestOptions = {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(data)
+            // };
+            // fetch('http://localhost:9000/users/signin', requestOptions)
+            //     .then(response => {console.log(response.json());});
+
+            // console.log(data);
+
+            const config = {
+                headers: {
+                  "Content-Type": "application/json",
+                },
+            };
+
+            axios.post(`http://localhost:9000/users/signin`, data, config)
+            .then(response =>{
+                console.log(response);
+            }).catch(err =>{console.log(err);});
+    
+
+        }
+    render() {
         return (
-            <form onSubmit = {handleSubmit}>
+            <form onSubmit = {this.handleSubmit}>
                 <h3>Sign In</h3>
                 <div className="mt-1 form-group">
                     <label>Email address</label>
                     <input 
                         name = "gmail"
-                        value = {user.gmail} 
-                        onChange={ handleChange } 
+                        value = {this.state.gmail} 
+                        onChange={ this.handleChange } 
                         type="email" 
                         className="mt-1 form-control" 
                         placeholder="Enter email" 
@@ -70,8 +68,8 @@ export default function LogIn() {
                     <label>Password</label>
                     <input 
                         name = "password"
-                        value={user.password} 
-                        onChange={handleChange} 
+                        value={this.state.password} 
+                        onChange={this.handleChange} 
                         type="password" 
                         className="mt-1 form-control" 
                         placeholder="Enter password"
@@ -88,13 +86,15 @@ export default function LogIn() {
                     </button>
                 </div>
                 <p className="mt-1 forgot-password text-right">
-                    Don't have Account?<a href="#" onClick={()=>{
-                        history.push('/sign-up');
-                    }}
+                    Don't have Account?<a href="/sign-up" 
+                    // onClick={()=>{
+                    //     history.push('/sign-up');
+                    // }}
                     >
                         {" "}
                         Register Now!</a>
                 </p>
             </form>
         );
+    }
 }

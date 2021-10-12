@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var db=require('../database');//chèn model database vào đế kết nối db
-// var User = require('../models/user');
+var db=require('../database');
 
 
 /* GET users listing. */
@@ -27,13 +26,14 @@ router.post('/signup', (req, res) => {
   let sql = 'INSERT INTO `users` SET ?';
   db.query(sql, user_info, (err, result)=>{
     if (err) {throw err;}
-    res.send({message: 'success'})
+    res.send({isRegistered: true})
   });
 });
 
 router.post('/signin', async(req, res, next) => {
   let gmail = req.body.gmail;
   let password = req.body.password;
+  console.log(gmail, password);
   let query = `select * from users where gmail = '${gmail}'`;
   db.query(query, (err, row) => {
     if (err) {throw err;}
@@ -45,17 +45,19 @@ router.post('/signin', async(req, res, next) => {
         const bcrypt = require("bcrypt");        
         var kq = bcrypt.compareSync(password, pass_fromdb);
         if (kq){ 
-            res.send({message: 'success'});              
+            res.send({
+              user: user,
+              iSignIn: true});              
         }   
         else {
-            res.send({message: 'error'}); 
+            res.send({isSignIn: false}); 
         }
   });
 });
 
-router.post('/detail', (req, res)=>{
-  let gmail = req.body.gmail;
-  let query = `select * from users where gmail = '${gmail}'`;
+router.get('/detail/:id', (req, res)=>{
+  let id = req.params.id;
+  let query = `select * from users where userId = '${id}'`;
   db.query(query, (err,result)=>{
     if(err) {throw err};
     if(result.length < 0){res.send({message: "user not found!"});}

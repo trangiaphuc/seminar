@@ -1,12 +1,7 @@
-import React, {useState} from "react";
-import { useHistory } from "react-router-dom";
+import React, {} from "react";
+//import { useHistory } from "react-router-dom";
 
 export default function SignUp() {
-
-        let history = useHistory();
-
-
-
         return (
             <form>
                 <h3>Sign Up</h3>
@@ -41,10 +36,10 @@ export default function SignUp() {
                             Sign Up</button>
                 </div>
                 <p className="mt-1 forgot-password text-right">
-                    Already registered <a href="#"
-                    onClick= {()=>{
-                        history.push('/sign-in');
-                    }}
+                    Already registered <a href="/sign-in"
+                    // onClick= {()=>{
+                    //     history.push('/sign-in');
+                    // }}
                     >
                         Sign in Now?</a>
                 </p>

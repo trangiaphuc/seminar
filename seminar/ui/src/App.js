@@ -4,6 +4,8 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/signin/signin";
 import SignUp from "./components/signup/signup";
+import Dashboard from "./components/dashboard/dashboard";
+
 
 function App() {
   return (<Router>
@@ -27,7 +29,7 @@ function App() {
       <div className="auth-wrapper">
         <div className="auth-inner">
           <Switch>
-            <Route exact path='/' component={Login} />
+            <Route exact path='/' component={Dashboard} />
             <Route path="/sign-in" component={Login} />
             <Route path="/sign-up" component={SignUp} />
           </Switch>
