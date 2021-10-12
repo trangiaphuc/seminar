@@ -65,7 +65,7 @@ router.post('/detail', (req, res)=>{
   })
 })
 
-router.post('/edit', (req, res) => {
+router.put('/edit', (req, res) => {
   let firstName = req.body.firstName;
   let lastName = req.body.lastName;
   let birthday = req.body.birthday;
