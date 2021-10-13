@@ -4,13 +4,12 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Login from "./components/signin/signin";
 import SignUp from "./components/signup/signup";
-import Dashboard from "./components/dashboard/dashboard";
-
+import Dashboard from "./components/bmi/dashboard";
 
 function App() {
   return (<Router>
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light fixed-top">
+      {/* <nav className="navbar navbar-expand-lg navbar-light fixed-top mb-200">
         <div className="container">
           <Link className="navbar-brand" to={"/sign-in"}>REACT FORM</Link>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
@@ -24,17 +23,19 @@ function App() {
             </ul>
           </div>
         </div>
-      </nav>
+      </nav> */}
 
-      <div className="auth-wrapper">
-        <div className="auth-inner">
-          <Switch>
-            <Route exact path='/' component={Dashboard} />
-            <Route path="/sign-in" component={Login} />
-            <Route path="/sign-up" component={SignUp} />
-          </Switch>
+        <div className="auth-wrapper">
+          <div className="auth-inner">
+            <Switch>
+              <Route exact path='/' component={Dashboard} />
+              <Route path="/sign-in" component={Login} />
+              <Route path="/sign-up" component={SignUp} />
+            </Switch>
+          </div>
         </div>
-      </div>
+
+        
     </div></Router>
   );
 }

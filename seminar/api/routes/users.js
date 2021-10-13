@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var db=require('../database');
-
+var cors = require('cors');
 
 /* GET users listing. */
 router.get('/listusers', function(req, res, next) {
@@ -14,7 +14,7 @@ router.get('/listusers', function(req, res, next) {
   });
 });
 
-router.post('/signup', (req, res) => {
+router.post('/signup', cors(), (req, res) => {
   let gmail = req.body.gmail;
   let password = req.body.password;
 

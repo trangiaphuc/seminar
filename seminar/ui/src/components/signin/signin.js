@@ -18,30 +18,15 @@ export default class LogIn extends React.Component {
             let data = JSON.stringify({
                 password: this.state.password,
                 gmail: this.state.gmail
-            });
+            })
         
-            var request = new XMLHttpRequest();
-            request.open('POST', 'http://localhost:9000/users/signin', true);
-            request.setRequestHeader('Content-Type', 'application/json; charset=UTF-8');
-            request.send(data);
+            console.log(data);
 
-            // const requestOptions = {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify(data)
-            // };
-            // fetch('http://localhost:9000/users/signin', requestOptions)
-            //     .then(response => {console.log(response.json());});
-
-            // console.log(data);
-
-            const config = {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-            };
-
-            axios.post(`http://localhost:9000/users/signin`, data, config)
+            axios.post(`http://localhost:9000/users/signin`, data, {
+                Headers: {
+                    'Content-Type': 'application/json',
+                }, 
+            })
             .then(response =>{
                 console.log(response);
             }).catch(err =>{console.log(err);});

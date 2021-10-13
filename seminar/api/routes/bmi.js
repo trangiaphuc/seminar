@@ -11,9 +11,8 @@ router.get('/', (req, res) => {
     });
 });
 
-router.post('/bmirecords', (req, res) => {
-    let userId = req.body.userId;
-    let query = `select * from bmi where userId = '${userId}'`;
+router.get('/bmirecords', (req, res) => {
+    let query = `select * from bmi`;
     db.query(query, (err, result) => {
         if (err) {throw err;}
         if(result.length < 0) {res.send({message: 'Invalid User'});}
@@ -24,15 +23,14 @@ router.post('/bmirecords', (req, res) => {
 });
 
 router.post('/addbmi', (req, res) =>{
-    let userId = req.body.userId;
     let height = req.body.height;
     let weight = req.body.weight;
 
-    let bmiRecord = {userId: userId, height: height, weight: weight};
+    let bmiRecord = {height: height, weight: weight};
     let query = 'insert bmi set ?';
     db.query(query, bmiRecord, (err, result) => {
         if (err) {throw err;}
-        else{res.send({message: "success"});}
+        else{res.send({added: true});}
     })
 })
 
