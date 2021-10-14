@@ -18,8 +18,13 @@ export default class NumInput extends React.Component {
   }
 
   onChange(e) {
-    if (e.target.value.match(/^\d*$/)) {
+    if(e.target.value <0 ){
+      alert("Please Enter a Positive Value!");
+      e.target.value = 0;
+  }
+  if (e.target.value.match(/^\d*$/)) {
       this.setState({ value: e.target.value });
+    
     }
   }
 

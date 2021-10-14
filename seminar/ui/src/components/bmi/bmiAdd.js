@@ -1,7 +1,7 @@
 import React, { } from "react";
 //import {useHistory} from "react-router-dom";
 import axios from "axios";
-
+import NumInput from "../specializedComponent/NumInput"
 
 export default class BMIAdd extends React.Component{
     
@@ -69,17 +69,19 @@ export default class BMIAdd extends React.Component{
         return(
             <form className="form-inline" onSubmit={this.handleSubmit}>
                 <div className = "d-flex justify-content-start">
-                    <div className="form-group">
-                        <input 
+                    <div className="form-floating">
+                        <NumInput 
                         name = "height"
                         value = {this.state.height}
                         onChange={this.handleChange}
-                        type="number" 
+                        type="text" 
                         className="form-control w-100" 
                         id="height" 
                         placeholder ="Enter your height here!"/>
+                        <label htmlFor="height">Your Height</label>
                     </div>
-                    <div className="form-group mx-sm-3 d-flex justify-content-start">
+                    <div> <p>  &nbsp;&nbsp;&nbsp; </p></div>
+                    <div className="form-floating">
                         <input 
                         name = "weight"
                         value = {this.state.weight}
@@ -88,9 +90,9 @@ export default class BMIAdd extends React.Component{
                         className="form-control w-100" 
                         id="weight" 
                         placeholder="Enter your weight here!"/>
+                        <label htmlFor="weight">Your Weight</label>
                     </div>
                 </div>
-                <br/>
                 <button type="submit" className="btn btn-primary btn-block mb-2 mt-3">Confirm your Weight and Height Now!</button>
             </form>
         )

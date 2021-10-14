@@ -10,7 +10,7 @@ const BMIRow = withRouter(({
     // location: { search }
     // , closeIssue, deleteIssue, index,
   }) => {
-    //const selectLocation = { pathname: `/bmiRecords/${bmiRecords.id}`, search };
+
     return (
         <tr>
         <td>{bmirecord.recordId}</td>
