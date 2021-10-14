@@ -4,11 +4,9 @@ import {
     // NavLink, 
     withRouter } from 'react-router-dom';
 
+//1 item duoc map
 const BMIRow = withRouter(({
     bmirecord
-    // , 
-    // location: { search }
-    // , closeIssue, deleteIssue, index,
   }) => {
 
     return (
@@ -23,8 +21,9 @@ const BMIRow = withRouter(({
 
   
 export default function bmiTable(props) {
-    var bmirecords= props.bmirecords;
-    // let currentDate = new Date();
+  //lay danh sach bmmirecord tu props  
+  var bmirecords= props.bmirecords;
+  //map data
     const bmiRows = bmirecords.map(bmirecord =>(
         <BMIRow
             key={bmirecord.recordId}

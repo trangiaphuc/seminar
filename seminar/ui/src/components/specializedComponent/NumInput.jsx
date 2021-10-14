@@ -15,14 +15,13 @@ export default class NumInput extends React.Component {
     this.state = { value: format(props.value) };
     this.onBlur = this.onBlur.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.handleFocus = this.handleFocus.bind(this);
   }
 
+  handleFocus = (event) => event.target.select();
+
   onChange(e) {
-    if(e.target.value <0 ){
-      alert("Please Enter a Positive Value!");
-      e.target.value = 0;
-  }
-  if (e.target.value.match(/^\d*$/)) {
+    if (e.target.value.match(/^\d*$/)) {
       this.setState({ value: e.target.value });
     
     }
@@ -43,6 +42,7 @@ export default class NumInput extends React.Component {
         value={value}
         onBlur={this.onBlur}
         onChange={this.onChange}
+        onFocus={this.handleFocus}
       />
     );
   }

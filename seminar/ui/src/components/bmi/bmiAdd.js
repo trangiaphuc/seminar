@@ -12,24 +12,23 @@ export default class BMIAdd extends React.Component{
             weight : 0,
             height : 0,
         };
-
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange = e =>{
-        if(e.target.value <0 ){
-            alert("Please Enter a Positive Value!");
-            e.target.value = 0;
-        }
-
-        this.setState({[e.target.name] : e.target.value});
-        console.log({bmidata: this.state})
+    //handleChange set state 
+    handleChange = (e, naturalValue) =>{
+        const { name, value: textValue } = e.target;
+        const value = naturalValue === undefined ? textValue : naturalValue;
+        this.setState({[name] : value});
+        // console.log({bmidata: this.state})
+        // console.log(typeof(e.target.value));
     }
 
-
+    //post api bmi data vua nhap vao
     handleSubmit = e => {
-
         e.preventDefault();
+
         let data = {
             weight: this.state.weight,
             height: this.state.height,
@@ -66,15 +65,15 @@ export default class BMIAdd extends React.Component{
     };
 
     render() {
+        const {weight, height} = this.state;
         return(
             <form className="form-inline" onSubmit={this.handleSubmit}>
                 <div className = "d-flex justify-content-start">
                     <div className="form-floating">
                         <NumInput 
                         name = "height"
-                        value = {this.state.height}
+                        value = {height}
                         onChange={this.handleChange}
-                        type="text" 
                         className="form-control w-100" 
                         id="height" 
                         placeholder ="Enter your height here!"/>
@@ -82,11 +81,10 @@ export default class BMIAdd extends React.Component{
                     </div>
                     <div> <p>  &nbsp;&nbsp;&nbsp; </p></div>
                     <div className="form-floating">
-                        <input 
+                        <NumInput 
                         name = "weight"
-                        value = {this.state.weight}
+                        value = {weight}
                         onChange= {this.handleChange}
-                        type="number" 
                         className="form-control w-100" 
                         id="weight" 
                         placeholder="Enter your weight here!"/>
