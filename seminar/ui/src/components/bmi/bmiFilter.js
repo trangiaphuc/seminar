@@ -56,7 +56,7 @@ class BMIFilter extends React.Component {
         if (weightMax) params.set('weightMax', weightMax);
     
         //typed data
-        const search = params.toString() ? `?${params.toString()}` : '';
+        const search = params.toString() ? `?${params.toString() }` : '';
         // console.log(search);
         //push param vao thanah url
         history.push({ pathname: '/', search });
@@ -73,7 +73,7 @@ class BMIFilter extends React.Component {
                         name = "weightMin"
                         value = {weightMin}
                         onChange={this.handleChange}
-                        type="text" 
+                        type="number" 
                         className="form-control w-100" 
                         id="height" 
                         placeholder ="Enter your height here!"/>
